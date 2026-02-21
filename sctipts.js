@@ -9,6 +9,9 @@ const job8 = document.getElementById('notapplied8');
 const allJobs = document.getElementById('allbtn')
 const interview = document.getElementById('interviewbtn')
 const rejected = document.getElementById('rejectedbtn')
+const mainContent = document.getElementById('maincontents')
+const noJob = document.getElementById('nojob')
+const allJobsCircular = document.getElementById('alljobcirculars')
 
 allJobs.addEventListener('click', function(){
     allJobs.style.backgroundColor = '#3B82F6';
@@ -17,6 +20,8 @@ allJobs.addEventListener('click', function(){
     interview.style.color = '#64748B';
     rejected.style.backgroundColor = 'white';
     rejected.style.color = '#64748B';
+    noJob.classList.add('hidden')
+    allJobsCircular.classList.remove('hidden')
     
 })
 interview.addEventListener('click', function(){
@@ -26,6 +31,9 @@ interview.addEventListener('click', function(){
     allJobs.style.color = '#64748B';
     rejected.style.backgroundColor = 'white';
     rejected.style.color = '#64748B';
+    allJobsCircular.classList.add('hidden')
+    noJob.classList.remove('hidden')
+    allJobsCircular.classList.add('alljobcirculars')
 })
 rejected.addEventListener('click', function(){
     rejected.style.backgroundColor = '#3B82F6' ;
