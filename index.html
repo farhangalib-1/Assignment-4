@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Daisy UI CDN file -->
-     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- google font -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
      <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
     <title>Document</title>
+
     <style>
         .geist{
   font-family: "Geist", sans-serif;
@@ -26,7 +27,7 @@
 
     <!-- heading Section -->
     <section class="w-10/12 mx-auto mt-[60px] border-b-2 border-gray-200">
-        <h1 class="text-5xl font-bold text-[#002C5C]">Job Application Tracker</h1>
+        <h1 class="text-4xl font-bold text-[#002C5C]">Job Application Tracker</h1>
         <div class="cards grid grid-cols-3 gap-4 mt-5 mb-[30px]">
             <div class="card p-5 shadow" >
                 <h3 class="text-[14px] font-medium text-[#323B49]">Total</h3>
@@ -51,10 +52,10 @@
             <h1 class="text-2xl text-[#002C5C] font-bold">Available Jobs</h1>
             <p class="text-[#64748B] font-medium">8 jobs</p>
             </div>
-            <div class="allbtns">
+            <div id="allbtns">
                 <button class="shadow px-8 py-2 bg-[#3B82F6] rounded-lg text-white font-medium mr-2 cursor-pointer" id="allbtn">All</button>
                 <button class="shadow px-[13px] py-2 rounded-lg font-medium mr-2 cursor-pointer text-[#64748B]" id="interviewbtn">Interview</button>
-                <button class="shadow px-[13px] py-2 rounded-lg font-medium mr-2 cursor-pointer text-[#64748B]">Rejected</button>
+                <button class="shadow px-[13px] py-2 rounded-lg font-medium mr-2 cursor-pointer text-[#64748B]" id="rejectedbtn">Rejected</button>
        </div>
             </div>
         <div class="allCards space-y-4 mt-4" id="alljobcirculars">
