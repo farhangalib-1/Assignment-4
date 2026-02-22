@@ -12,7 +12,9 @@ const rejected = document.getElementById('rejectedbtn')
 const mainContent = document.getElementById('maincontents')
 const noJob = document.getElementById('nojob')
 const allJobsCircular = document.getElementById('alljobcirculars')
-
+const interviewcounter1 = document.getElementById('interviewcount1')
+const rejectedcounter1 = document.getElementById('rejectedcount1')
+const jobcounter = document.getElementById('totaljobs');
 const interviewClick1 = document.getElementById('interview1')
 const rejectedClick1 = document.getElementById('rejected1')  
 const interviewClick2 = document.getElementById('interview2')
@@ -29,6 +31,11 @@ const interviewClick7 = document.getElementById('interview7')
 const rejectedClick7 = document.getElementById('rejected7') 
 const interviewClick8 = document.getElementById('interview8')
 const rejectedClick8 = document.getElementById('rejected8') 
+const card1 = document.getElementById('card-1')
+const interviewCards = []
+const rejectedCards = []
+
+console.log(interviewCards);
 
 
 interviewClick1.addEventListener('click' , function(){
@@ -36,24 +43,47 @@ interviewClick1.addEventListener('click' , function(){
     job1.style.backgroundColor = '#10B981';
     job1.style.color = 'white'
     job1.style.border = 'none'
+    interviewcounter1.innerText = parseInt(interviewcounter1.innerText) + 1; 
+    if(parseInt(rejectedcounter1.innerText) > 0){
+        rejectedcounter1.innerText = parseInt(rejectedcounter1.innerText) - 1;
+    }
+    interviewClick1.disabled = true;
+    rejectedClick1.disabled = false;
+    interviewCards.push(card1)
+
 })
 rejectedClick1.addEventListener('click', function(){
     job1.innerText = 'Rejected'
     job1.style.backgroundColor = '#EF4444';
     job1.style.color = 'white'
     job1.style.border = 'none'
+    rejectedcounter1.innerText = parseInt(rejectedcounter1.innerText) + 1;
+    interviewcounter1.innerText = parseInt(interviewcounter1.innerText) - 1;
+    rejectedClick1.disabled = true;
+    interviewClick1.disabled = false;
+   
 })
 interviewClick2.addEventListener('click' , function(){
     job2.innerText = 'Interview'
     job2.style.backgroundColor = '#10B981';
     job2.style.color = 'white'
     job2.style.border = 'none'
+interviewcounter1.innerText = parseInt(interviewcounter1.innerText) + 1; 
+    if(parseInt(rejectedcounter1.innerText) > 0){
+        rejectedcounter1.innerText = parseInt(rejectedcounter1.innerText) - 1;
+    }
+    interviewClick2.disabled = true;
+    rejectedClick2.disabled = false;
 })
 rejectedClick2.addEventListener('click', function(){
     job2.innerText = 'Rejected'
     job2.style.backgroundColor = '#EF4444';
     job2.style.color = 'white'
     job2.style.border = 'none'
+rejectedcounter1.innerText = parseInt(rejectedcounter1.innerText) + 1;
+    interviewcounter1.innerText = parseInt(interviewcounter1.innerText) - 1;
+    rejectedClick2.disabled = true;
+    interviewClick2.disabled = false;
 })
 interviewClick3.addEventListener('click' , function(){
     job3.innerText = 'Interview'
@@ -139,6 +169,7 @@ allJobs.addEventListener('click', function(){
     rejected.style.color = '#64748B';
     noJob.classList.add('hidden')
     allJobsCircular.classList.remove('hidden')
+    jobcounter.innerText = 8;
     
 })
 interview.addEventListener('click', function(){
@@ -151,6 +182,7 @@ interview.addEventListener('click', function(){
     allJobsCircular.classList.add('hidden')
     noJob.classList.remove('hidden')
     allJobsCircular.classList.add('alljobcirculars')
+    jobcounter.innerText = interviewcounter1.innerText;
 })
 rejected.addEventListener('click', function(){
     rejected.style.backgroundColor = '#3B82F6' ;
@@ -159,5 +191,9 @@ rejected.addEventListener('click', function(){
     interview.style.color = '#64748B';
     allJobs.style.backgroundColor = 'white';
     allJobs.style.color = '#64748B';
+    allJobsCircular.classList.add('hidden')
+    noJob.classList.remove('hidden')
+    allJobsCircular.classList.add('alljobcirculars')
+    jobcounter.innerText = rejectedcounter1.innerText;
 })
 
