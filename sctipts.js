@@ -42,6 +42,7 @@ function toggleStyle(id){
    if(id === 'interviewbtn'){
     filterSection.classList.remove('hidden')
     jobCircular.classList.add('hidden')
+    noJob.classList.remove('hidden')
     addToInterviewList()
    }
    if(id === 'rejectedbtn'){
@@ -49,6 +50,15 @@ function toggleStyle(id){
     jobCircular.classList.add('hidden')
     addToRejectedList()
    }
+   if(interviewList.length > 0 ){
+    noJob.classList.add('hidden')
+}
+ if(rejectList.length > 0 ){
+    noJob.classList.add('hidden')
+}
+    if(interviewList.length === 0 || rejectList.length === 0){
+        noJob.classList.remove('hidden')
+    }
 }
 
 mainContainer.addEventListener('click', function(event){
