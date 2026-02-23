@@ -50,14 +50,11 @@ function toggleStyle(id){
     jobCircular.classList.add('hidden')
     addToRejectedList()
    }
-   if(interviewList.length > 0 ){
-    noJob.classList.add('hidden')
-}
- if(rejectList.length > 0 ){
-    noJob.classList.add('hidden')
-}
-    if(interviewList.length === 0 || rejectList.length === 0){
+    if(interviewList.length === 0 && currentPosition === 'interviewbtn' || rejectList.length === 0 && currentPosition === 'rejectedbtn'){
         noJob.classList.remove('hidden')
+    }
+    if(interviewList.length > 0 && currentPosition === 'interviewbtn' || rejectList.length > 0 && currentPosition === 'rejectedbtn'){  
+        noJob.classList.add('hidden')
     }
 }
 
