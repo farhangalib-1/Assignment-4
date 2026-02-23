@@ -2,13 +2,18 @@ const jobCircular = document.getElementById('alljobcirculars')
 const totalCount = document.getElementById('totalcount1')
 const interviewCount = document.getElementById('interviewcount1')
 const rejectCount = document.getElementById('rejectedcount1')
-const interviewList = []
-const rejectList = []
+let interviewList = []
+let rejectList = []
 const jobBtn = document.getElementById('allbtn')
 const interviewBtn = document.getElementById('interviewbtn')
 const rejectBtn = document.getElementById('rejectedbtn')
 const mainContainer = document.getElementById('maincontainer')
 const filterSection = document.getElementById('filter-section')
+let currentPosition =  'all'
+const noJob = document.getElementById('nojob');
+
+
+
 
 
 // count the total job, interview and rejected
@@ -28,6 +33,7 @@ function toggleStyle(id){
    interviewBtn.classList.add('text-[#64748B]')
    rejectBtn.classList.add('text-[#64748B]')
    const selectedBtn = document.getElementById(id)
+   currentPosition = id;
    selectedBtn.classList.add('bg-[#3B82F6]' ,'text-white')
     if(id === 'allbtn'){
         filterSection.classList.add('hidden')  
@@ -56,22 +62,37 @@ mainContainer.addEventListener('click', function(event){
     const interviewBtn1 = parentNode.querySelector('.interview1').innerText
     const rejectBtn1 = parentNode.querySelector('.rejected1').innerText
 
+    parentNode.querySelector('.notapplied').innerText = 'INTERVIEW'
+    parentNode.querySelector('.notapplied').classList.remove('bg-[#EEF4FF]', 'text-[#002C5C]')
+    parentNode.querySelector('.notapplied').classList.add('bg-[#10B981]', 'text-white')
+     parentNode.querySelector('.notapplied').classList.remove('bg-[#EF4444]', 'text-white')
+        parentNode.querySelector('.notapplied').classList.add('bg-[#10B981]', 'text-white')
     
     const jobInfo = {
-        jobName, jobTitle, jobType, status, jobDetails, interviewBtn1, rejectBtn1
+        jobName, 
+        jobTitle, 
+        jobType, 
+        status: 'INTERVIEW',
+        jobDetails, 
+        interviewBtn1, 
+        rejectBtn1
     }
 
   const jobExists = interviewList.find(job=> job.jobName === jobInfo.jobName)
-  parentNode.querySelector('.notapplied').innerText = 'INTERVIEW'
-  parentNode.querySelector('.notapplied').classList.remove('bg-[#EEF4FF]', 'text-[#002C5C]')
-    parentNode.querySelector('.notapplied').classList.add('bg-[#10B981]', 'text-white')
+  
+  
   if(!jobExists){
     interviewList.push(jobInfo)
   }
-  countJob()
-  addToInterviewList()
+
+  rejectList = rejectList.filter(job=> job.jobName !== jobInfo.jobName)
+  if(currentPosition === 'rejectedbtn'){
+        addToRejectedList()
     }
-    if(event.target.classList.contains('rejected1')){
+  countJob()
+    }
+
+    else if(event.target.classList.contains('rejected1')){
     const parentNode = event.target.parentNode
     const jobName = parentNode.querySelector('.jobname').innerText
     const jobTitle = parentNode.querySelector('.jobtile').innerText
@@ -80,22 +101,25 @@ mainContainer.addEventListener('click', function(event){
     const jobDetails = parentNode.querySelector('.jobdetails').innerText
     const interviewBtn1 = parentNode.querySelector('.interview1').innerText
     const rejectBtn1 = parentNode.querySelector('.rejected1').innerText
-
-    status.innerText = 'REJECTED'
+    parentNode.querySelector('.notapplied').innerText = 'REJECTED'
+    parentNode.querySelector('.notapplied').classList.remove('bg-[#EEF4FF]', 'text-[#002C5C]')
+    parentNode.querySelector('.notapplied').classList.add('bg-[#EF4444]', 'text-white')
     
     const jobInfo = {
-        jobName, jobTitle, jobType, status, jobDetails, interviewBtn1, rejectBtn1
+        jobName, jobTitle, jobType, status: 'REJECTED', jobDetails, interviewBtn1, rejectBtn1
     }
 
   const jobExists = rejectList.find(job=> job.jobName === jobInfo.jobName)
-  parentNode.querySelector('.notapplied').innerText = 'REJECTED'
-    parentNode.querySelector('.notapplied').classList.remove('bg-[#EEF4FF]', 'text-[#002C5C]')
-    parentNode.querySelector('.notapplied').classList.add('bg-[#EF4444]', 'text-white')
+
   if(!jobExists){
     rejectList.push(jobInfo)
   }
+  interviewList = interviewList.filter(job=> job.jobName !== jobInfo.jobName)
+
+    if(currentPosition === 'interviewbtn'){
+        addToInterviewList()
+    }
   countJob()
-  addToRejectedList()
     }
    
 })
