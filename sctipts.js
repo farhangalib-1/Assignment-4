@@ -1,7 +1,7 @@
 const jobCircular = document.getElementById('alljobcirculars')
 const totalCount = document.getElementById('totalcount1')
-const interviewCount = document.getElementById('interviewcount1')
-const rejectCount = document.getElementById('rejectedcount1')
+const interviewCount = document.getElementById('totalinterview')
+const rejectCount = document.getElementById('totalreject')
 let interviewList = []
 let rejectList = []
 const jobBtn = document.getElementById('allbtn')
@@ -11,10 +11,7 @@ const mainContainer = document.getElementById('maincontainer')
 const filterSection = document.getElementById('filter-section')
 let currentPosition =  'all'
 const noJob = document.getElementById('nojob');
-
-
-
-
+let totalJobs = document.getElementById('totaljobs')
 
 // count the total job, interview and rejected
 function countJob(){
@@ -38,16 +35,21 @@ function toggleStyle(id){
     if(id === 'allbtn'){
         filterSection.classList.add('hidden')  
         jobCircular.classList.remove('hidden')
+        totalJobs.innerText = jobCircular.children.length
     }
    if(id === 'interviewbtn'){
     filterSection.classList.remove('hidden')
     jobCircular.classList.add('hidden')
     noJob.classList.remove('hidden')
+    totalJobs.innerText = interviewList.length
     addToInterviewList()
    }
    if(id === 'rejectedbtn'){
     filterSection.classList.remove('hidden')
     jobCircular.classList.add('hidden')
+    noJob.classList.remove('hidden')
+    totalJobs.innerText = rejectList.length
+
     addToRejectedList()
    }
     if(interviewList.length === 0 && currentPosition === 'interviewbtn' || rejectList.length === 0 && currentPosition === 'rejectedbtn'){
