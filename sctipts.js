@@ -38,6 +38,11 @@ function toggleStyle(id){
     jobCircular.classList.add('hidden')
     addToInterviewList()
    }
+   if(id === 'rejectedbtn'){
+    filterSection.classList.remove('hidden')
+    jobCircular.classList.add('hidden')
+    addToRejectedList()
+   }
 }
 
 mainContainer.addEventListener('click', function(event){
@@ -50,16 +55,47 @@ mainContainer.addEventListener('click', function(event){
     const jobDetails = parentNode.querySelector('.jobdetails').innerText
     const interviewBtn1 = parentNode.querySelector('.interview1').innerText
     const rejectBtn1 = parentNode.querySelector('.rejected1').innerText
+
     
     const jobInfo = {
         jobName, jobTitle, jobType, status, jobDetails, interviewBtn1, rejectBtn1
     }
 
   const jobExists = interviewList.find(job=> job.jobName === jobInfo.jobName)
+  parentNode.querySelector('.notapplied').innerText = 'INTERVIEW'
+  parentNode.querySelector('.notapplied').classList.remove('bg-[#EEF4FF]', 'text-[#002C5C]')
+    parentNode.querySelector('.notapplied').classList.add('bg-[#10B981]', 'text-white')
   if(!jobExists){
     interviewList.push(jobInfo)
   }
+  countJob()
   addToInterviewList()
+    }
+    if(event.target.classList.contains('rejected1')){
+    const parentNode = event.target.parentNode
+    const jobName = parentNode.querySelector('.jobname').innerText
+    const jobTitle = parentNode.querySelector('.jobtile').innerText
+    const jobType = parentNode.querySelector('.jobtype').innerText
+    const status = parentNode.querySelector('.notapplied').innerText
+    const jobDetails = parentNode.querySelector('.jobdetails').innerText
+    const interviewBtn1 = parentNode.querySelector('.interview1').innerText
+    const rejectBtn1 = parentNode.querySelector('.rejected1').innerText
+
+    status.innerText = 'REJECTED'
+    
+    const jobInfo = {
+        jobName, jobTitle, jobType, status, jobDetails, interviewBtn1, rejectBtn1
+    }
+
+  const jobExists = rejectList.find(job=> job.jobName === jobInfo.jobName)
+  parentNode.querySelector('.notapplied').innerText = 'REJECTED'
+    parentNode.querySelector('.notapplied').classList.remove('bg-[#EEF4FF]', 'text-[#002C5C]')
+    parentNode.querySelector('.notapplied').classList.add('bg-[#EF4444]', 'text-white')
+  if(!jobExists){
+    rejectList.push(jobInfo)
+  }
+  countJob()
+  addToRejectedList()
     }
    
 })
@@ -70,7 +106,26 @@ filterSection.innerHTML = ''
         console.log(job);
         
 let div = document.createElement('div')
-div.className = 'cards mx-auto shadow-sm rounded-lg p-6'
+div.className = 'cards mx-auto shadow-sm rounded-lg p-6 mt-4'
+div.innerHTML = `
+<h1 class="text-[#002C5C] text-[16px] font-bold mb-1 jobname">${job.jobName}</h1>
+                <p class="text-[#64748B] mb-5 jobtile">${job.jobTitle}</p>
+                <p class="text-[#64748B] mb-5 jobtype">${job.jobType}</p>
+               <button class="px-2 py-3 bg-[#EEF4FF] text-[#002C5C] mb-2 rounded-sm font-medium cursor-pointer notapplied" id="notapplied3">${job.status}</button>
+                <p class="mb-5 jobdetails">${job.jobDetails}</p>
+                <button class="border-2 text-[#10B981] border-[#10B981] px-2 py-3 rounded-sm mr-2 font-semibold cursor-pointer interview1" id="interview1">INTERVIEW</button>
+                <button class="border-2 px-2 py-3 rounded-sm text-[#EF4444] border-[#EF4444] font-semibold cursor-pointer rejected1" id="rejected1">REJECTED</button>
+`
+filterSection.appendChild(div)
+    }
+}
+function addToRejectedList(){
+filterSection.innerHTML = ''
+    for(const job of rejectList){
+        console.log(job);
+        
+let div = document.createElement('div')
+div.className = 'cards mx-auto shadow-sm rounded-lg p-6 mt-4'
 div.innerHTML = `
 <h1 class="text-[#002C5C] text-[16px] font-bold mb-1 jobname">${job.jobName}</h1>
                 <p class="text-[#64748B] mb-5 jobtile">${job.jobTitle}</p>
